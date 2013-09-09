@@ -29,7 +29,22 @@ public class Teste {
         
         EntityTransaction transacao = manager.getTransaction();
         
+       
+        Tipo tipo = new Tipo ("Pessoa Fisica");
+        
         try {
+            transacao.begin();
+            
+            
+            manager.persist(tipo);
+            transacao.commit();
+            
+            } 
+        catch (Exception e) {
+            transacao.rollback();
+        }
+        
+        try{
             transacao.begin();
             
             Pessoa p = new Pessoa();
@@ -37,10 +52,15 @@ public class Teste {
             p.setNome("Thaisa");
             
             p.setDataNascimento(new Date());
+            p.setTipo(tipo);
+            Email email = new Email("thaisagontijo@jhgghjgjhgj");
             
+            p.addEmail(email);
             manager.persist(p);
             
             transacao.commit();
+            
+            
             
         } 
         catch (Exception e) {

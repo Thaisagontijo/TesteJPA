@@ -40,6 +40,13 @@ public class Email implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Email(String email) {
+        this.email = email;
+    }
+    public Email() {
+       this.email = "";
+    }
     
 
     @Override

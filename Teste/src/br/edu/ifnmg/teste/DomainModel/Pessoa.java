@@ -4,7 +4,6 @@
  */
 package br.edu.ifnmg.teste.DomainModel;
 
-import com.sun.corba.se.impl.orbutil.closure.Constant;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -16,19 +15,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import sun.reflect.misc.ConstructorUtil;
 
 /**
  *
  * @author aluno
  */
 @Entity
-@Table(name="Email")
+@Table(name="Pessoa")
 
 
  public class Pessoa implements Serializable {
@@ -39,18 +36,19 @@ import sun.reflect.misc.ConstructorUtil;
     @Column(length=200)
     private String nome;
    
-    @ManyToOne(cascade= CascadeType.MERGE, fetch=FetchType.EAGER)
-    Tipo tipo;
- 
-          
-    @OneToMany(cascade= CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinColumn(name="email")
-    List<Email> emails;  
-    
     
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(name="dataNascimento")
     private Date dataNascimento;
+    
+    
+    @ManyToOne
+    Tipo tipo;
+ 
+          
+    @OneToMany(cascade= CascadeType.ALL, fetch=FetchType.EAGER)
+    List<Email> emails;  
+    
 
     public Long getId() {
         return id;

@@ -40,6 +40,14 @@ public class Tipo implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    
+    public Tipo(String nome) {
+        this.nome = nome;
+    }
+    public Tipo() {
+      this.nome = "";
+    }
     
     
 
