@@ -30,8 +30,17 @@ public class Email implements Serializable {
         this.id = id;
     }
     
-    @Column(length=200)
+    @Column(name="email", length=100)
     private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
 
     @Override
     public int hashCode() {

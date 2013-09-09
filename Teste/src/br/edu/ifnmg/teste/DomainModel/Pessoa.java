@@ -4,27 +4,48 @@
  */
 package br.edu.ifnmg.teste.DomainModel;
 
+import com.sun.corba.se.impl.orbutil.closure.Constant;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
+import sun.reflect.misc.ConstructorUtil;
 
 /**
  *
  * @author aluno
  */
 @Entity
-public class Pessoa implements Serializable {
+@Table(name="Email")
+
+
+ public class Pessoa implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(length=200)
     private String nome;
+   
+    @ManyToOne(cascade= CascadeType.MERGE, fetch=FetchType.EAGER)
+    Tipo tipo;
+ 
+          
+    @OneToMany(cascade= CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name="email")
+    List<Email> emails;  
     
     
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -54,8 +75,40 @@ public class Pessoa implements Serializable {
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
+
+    public List<Email> getEmails() {
+        return emails;
+    }
+
+    public void setEmails(List<Email> emails) {
+        this.emails = emails;
+    }
+    
+    
     
 
+       public void addEmail(Email e) {
+           if(!emails.contains(e)){
+               emails.add(e);
+           }
+       }
+       
+       public void removeEmail(Email e) {
+           if(emails.contains(e)){
+               emails.remove(e);
+           }
+       }
+ 
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

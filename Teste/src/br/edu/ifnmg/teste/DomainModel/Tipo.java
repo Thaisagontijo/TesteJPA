@@ -30,8 +30,18 @@ public class Tipo implements Serializable {
         this.id = id;
     }
     
-    @Column(length=200)
+    @Column(name="nome", length=255)
     private String nome;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+    
 
     @Override
     public int hashCode() {
