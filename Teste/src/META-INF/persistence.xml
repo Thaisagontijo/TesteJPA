@@ -3,6 +3,8 @@
   <persistence-unit name="UnidadePersistencia" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>br.edu.ifnmg.teste.DomainModel.Pessoa</class>
+    <class>br.edu.ifnmg.teste.DomainModel.Email</class>
+    <class>br.edu.ifnmg.teste.DomainModel.Tipo</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/BancoTeste"/>
       <property name="javax.persistence.jdbc.password" value="root"/>
