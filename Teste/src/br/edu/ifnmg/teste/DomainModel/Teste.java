@@ -5,10 +5,12 @@
 package br.edu.ifnmg.teste.DomainModel;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
@@ -30,26 +32,18 @@ public class Teste {
         EntityTransaction transacao = manager.getTransaction();
         
        
-        Tipo tipo = new Tipo ("Pessoa Fisica");
+        Tipo tipo = new Tipo ("Aluno");
         
         try {
             transacao.begin();
             
             
             manager.persist(tipo);
-            transacao.commit();
             
-            } 
-        catch (Exception e) {
-            transacao.rollback();
-        }
-        
-        try{
-            transacao.begin();
             
             Pessoa p = new Pessoa();
             
-            p.setNome("Thaisa");
+            p.setNome("Ana Luiza");
             
             p.setDataNascimento(new Date());
             p.setTipo(tipo);
@@ -65,7 +59,16 @@ public class Teste {
         } 
         catch (Exception e) {
             transacao.rollback();
+            System.out.println(e.getMessage());
         }
-        
+   
+    Query consulta = manager.createQuery("Select p from Pessoa p");
+    List<Pessoa> pessoas = consulta.getResultList();
+    
+    for(Pessoa p: pessoas){
+    System.out.println(p.getNome());
     }
+    
+    } 
+
 }
